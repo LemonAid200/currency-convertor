@@ -1,5 +1,6 @@
 <script lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
+import { useStore } from 'vuex';
 import { RouterLink, RouterView } from 'vue-router'
 import CustomDropdown from './components/CustomDropdown.vue';
 
@@ -10,10 +11,25 @@ export default {
   setup() {
     const mainCurrency = ref('RUB');
     const currencyOptions = reactive(['EUR', 'RUB', 'USD'])
+    const store = useStore();
+
+
+    const count = computed(() => store.getters.getCount);
+
+    const increment = () => {
+      store.dispatch('increment');
+    };
+
+    const decrement = () => {
+      store.dispatch('decrement');
+    };
 
     return {
       mainCurrency,
-      currencyOptions
+      currencyOptions,
+      count,
+      increment,
+      decrement
     };
   }
 };
@@ -29,6 +45,7 @@ export default {
       <CustomDropdown v-model="mainCurrency" :optionsList="currencyOptions"/>
   </header>
 
+  <h1 @click="increment">asdasd: {{ count }}</h1>
   <RouterView />
 </template>
 
