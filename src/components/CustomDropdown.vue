@@ -1,5 +1,5 @@
 <script lang="ts">
-import { reactive, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import IconDropdown from './icons/IconDropdown.vue';
 
 export default {
@@ -20,9 +20,9 @@ export default {
 
     setup(props, { emit }) {
         const localValue = ref(props.modelValue);
-        let isOptionsOpen = ref(false)
+        let isOptionsHidden = ref(true)
 
-        const toggleOptions = () => {isOptionsOpen.value = !isOptionsOpen.value}
+        const toggleOptions = () => {isOptionsHidden.value = !isOptionsHidden.value}
 
 
         watch(() => props.modelValue, (newValue) => {
@@ -37,7 +37,7 @@ export default {
 
         return {
             localValue,
-            isOptionsOpen,
+            isOptionsHidden,
             toggleOptions,
             updateValue
         };
@@ -54,7 +54,7 @@ export default {
         <IconDropdown/>
     </div>
 
-    <ul class="dropdown__options_list" :class="{'dropdown__options_list--closed': isOptionsOpen}">
+    <ul class="dropdown__options_list" :class="{'dropdown__options_list--closed': isOptionsHidden}">
         <li class="dropdown__options_list__option" v-for="(option, index) in optionsList"
             @click="updateValue(option)" :key="index">
             {{ option }}
