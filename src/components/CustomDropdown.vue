@@ -88,10 +88,16 @@ export default {
         position: absolute;
         padding-left: 0;
         list-style-type: none;
-        top: 100%;
+        top: 110%;
         overflow: hidden;
         transition: all 500ms;
         max-height: 500px;
+        opacity: 1;
+        background: var(--color-background);
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 4px;
+        z-index: 100;
 
 
         &__option {
@@ -101,6 +107,8 @@ export default {
     }
     &__options_list--closed {
         max-height: 0;
+        padding: 0;
+        opacity: 0;
     }
 
 }

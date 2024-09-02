@@ -25,10 +25,11 @@ export default {
           return currenciesList.map((name):{key: keyof typeof currenciesValues, name: string} => 
             {return {name: name, key: `${name.toLowerCase()}-${mainCurrency.toLowerCase()}` as keyof typeof currenciesValues}})
           .filter(elem => isValidCurrencyPair(elem.key)).map(elem => 
-            { return {from: mainCurrency, to: elem.name, value: currenciesValues[elem.key].toString()}})
+            { return {from: mainCurrency, to: elem.name, value: Number(currenciesValues[elem.key]).toFixed(2)}})
         }
         
-        let currenciesToDisplay = computed(() => { return getCurrenciesToDisplay(mainCurrency.value, currenciesList.value, currenciesValues.value)})
+        let currenciesToDisplay = computed(() => 
+          { return getCurrenciesToDisplay(mainCurrency.value, currenciesList.value, currenciesValues.value)})
 
         store.dispatch('updateCurrencyValuesList')
 
