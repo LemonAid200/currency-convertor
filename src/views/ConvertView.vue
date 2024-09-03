@@ -15,7 +15,6 @@ export default {
 
     const getCurrensiesRatio = (from:string, to:string):number => {
       const key = `${from}-${to}`.toLowerCase() as keyof typeof currencyValuesList.value
-      console.log(`${from}-${to}`.toLowerCase(), (key in currencyValuesList.value), currencyValuesList.value  )
       if (key in currencyValuesList.value){
         return currencyValuesList.value[key]       
       } else {
